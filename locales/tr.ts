@@ -1,0 +1,101 @@
+
+export const tr = {
+  app: {
+    name: "Live Quiz",
+  },
+
+  admin: {
+    title: "Yayıncı Paneli",
+    description: "Yeni bir yarışma oluşturun.",
+    question: "Yarışma Sorusu",
+    questionPlaceholder: "Sorunuzu yazın...",
+    options: "Cevap Seçenekleri",
+    correctAnswer: "Doğru Cevap",
+    duration: "Katılım Süresi",
+    seconds: "saniye",
+    preview: "Önizleme",
+    previewTitle: "Yarışma Önizlemesi",
+    edit: "Düzenle",
+    start: "Yarışmayı Başlat",
+  },
+
+  contest: {
+    rulesTitle: "Yarışma Kuralları",
+    rules: [
+      "Her katılımcının yalnızca bir cevap hakkı vardır.",
+      "Doğru cevap 100, yanlış cevap 0 puandır.",
+      "Süre dolduktan sonra cevap kabul edilmez.",
+      "Doğru cevap verenler arasında en hızlı olan kazanır.",
+      "Hiç doğru cevap yoksa kazanan olmaz.",
+    ],
+  },
+
+  play: {
+    title: "Yarışmaya Katıl",
+    description: "Katılımcınızı seçin ve soruyu cevaplayın.",
+    contestId: "Yarışma ID",
+    contestIdPlaceholder: "Yarışma ID'sini yapıştırın",
+    openContest: "Yarışmayı Aç",
+    loading: "Yarışma yükleniyor...",
+    participant: "Katılımcı Seç",
+    participantName: "Katılımcı",
+    question: "Yarışma Sorusu",
+    remainingTime: "Kalan Süre",
+    submit: "Cevabı Gönder",
+    submitting: "Gönderiliyor...",
+    selectAnswer: "Lütfen bir cevap seçin.",
+    submitted: "Cevabınız başarıyla kaydedildi.",
+    alreadySubmitted: "Bu katılımcı daha önce cevap gönderdi.",
+    closed: "Yarışmanın katılım süresi doldu.",
+    notFound: "Yarışma bulunamadı.",
+    error: "Bir hata oluştu. Tekrar deneyin.",
+    statusError: "Katılım durumu kontrol edilemedi.",
+    statusChecking: "Katılım durumu kontrol ediliyor...",
+    noContest: "Katılmak için yarışma ID'sini girin.",
+    answerHidden: "Doğru cevap yarışma bitmeden açıklanmaz.",
+  },
+
+  results: {
+    title: "Yarışma Sonuçları",
+    description: "Puanları, sıralamayı ve değerlendirme gerekçelerini inceleyin.",
+    contestId: "Yarışma ID",
+    contestIdPlaceholder: "Yarışma ID'sini yapıştırın",
+    load: "Sonuçları Görüntüle",
+    loading: "Sonuçlar yükleniyor...",
+    waitingTitle: "Yarışma devam ediyor",
+    waitingDescription: "Sonuçlar süre dolduğunda otomatik açıklanacak.",
+    remainingTime: "Kalan Süre",
+    finalizing: "Yarışma tamamlanıyor, sonuçlar hazırlanıyor...",
+    correctAnswer: "Doğru Cevap",
+    winner: "Yarışmanın Kazananı",
+    noWinner: "Kazanan Yok",
+    noWinnerExplanation: "Hiçbir katılımcı doğru cevap vermedi.",
+    participant: "Katılımcı",
+    selectedAnswer: "Seçilen Şık",
+    score: "Puan",
+    responseTime: "Cevap Süresi",
+    rank: "Sıralama",
+    explanation: "Değerlendirme Gerekçesi",
+    correct: "Doğru",
+    incorrect: "Yanlış",
+    notSubmitted: "Katılmadı",
+    secondsShort: "sn",
+    winnerExplanation:
+      "Doğru cevap verildi ve doğru cevaplar arasında en erken gönderim yapıldı.",
+    correctExplanation:
+      "Doğru cevap verildi. Ancak daha erken doğru cevap gönderen katılımcı bulunuyor.",
+    incorrectExplanation:
+      "Yanlış cevap verildi. Doğru seçenek: {option}.",
+    noAnswerExplanation:
+      "Katılımcı süre içerisinde cevap göndermedi.",
+    notFound: "Yarışma bulunamadı.",
+    error: "Sonuçlar alınamadı. Lütfen tekrar deneyin.",
+    anotherContest: "Başka Yarışma Aç",
+    newContest: "Yeni Yarışma Oluştur",
+  },
+
+  validation: {
+    required: "Lütfen bütün alanları doldurun.",
+    duplicateOptions: "Cevap seçenekleri farklı olmalıdır.",
+  },
+};
