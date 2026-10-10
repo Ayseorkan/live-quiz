@@ -220,7 +220,25 @@ try {
     Write-Host ""
 
     # ------------------------------------
-    # 1. PRECONDITION
+    # 1. HOME PAGE
+    # ------------------------------------
+
+    $homePage = Request-Api `
+        -Method GET `
+        -Path "/"
+
+    Assert-Status `
+        $homePage `
+        200 `
+        "Home page is available"
+
+    Assert-Check `
+        -Condition ($homePage.Raw -match 'zleyici G.r.n.m.ne Ge.') `
+        -Label "Host view shows the viewer-switch action" `
+        -Details "Expected host-mode switch text was not found in the page HTML."
+
+    # ------------------------------------
+    # 2. PRECONDITION
     # ------------------------------------
 
     $alreadyActive = Read-ActiveContest
@@ -254,7 +272,7 @@ try {
     }
 
     # ------------------------------------
-    # 2. INPUT VALIDATION
+    # 3. INPUT VALIDATION
     # ------------------------------------
 
     $badQuestion = @{
@@ -299,7 +317,7 @@ try {
         "Unsupported duration rejected"
 
     # ------------------------------------
-    # 3. CREATE FIRST CONTEST
+    # 4. CREATE FIRST CONTEST
     # ------------------------------------
 
     $created = Request-Api `
@@ -331,7 +349,7 @@ try {
         "First contest is discoverable as active"
 
     # ------------------------------------
-    # 4. BLOCK SECOND ACTIVE CONTEST
+    # 5. BLOCK SECOND ACTIVE CONTEST
     # ------------------------------------
 
     $secondDuringFirst = Request-Api `
@@ -349,7 +367,7 @@ try {
         "Active contest returns explicit error code"
 
     # ------------------------------------
-    # 5. PUBLIC CONTEST SECURITY
+    # 6. PUBLIC CONTEST SECURITY
     # ------------------------------------
 
     $publicContest = Request-Api `
@@ -373,7 +391,7 @@ try {
         -Label "Correct option hidden before deadline"
 
     # ------------------------------------
-    # 6. ANSWER SUBMISSION
+    # 7. ANSWER SUBMISSION
     # ------------------------------------
 
     $initialAnswer = Request-Api `
@@ -407,7 +425,7 @@ try {
         "Accepted answer returns ANSWER_ACCEPTED"
 
     # ------------------------------------
-    # 7. DUPLICATE ANSWER
+    # 8. DUPLICATE ANSWER
     # ------------------------------------
 
     $duplicateAnswer = Request-Api `
@@ -437,7 +455,7 @@ try {
         -Details $savedAnswer.Raw
 
     # ------------------------------------
-    # 8. MORE PARTICIPANTS
+    # 9. MORE PARTICIPANTS
     # ------------------------------------
 
     Start-Sleep -Milliseconds 1100
@@ -475,7 +493,7 @@ try {
         "Invalid answer option rejected"
 
     # ------------------------------------
-    # 9. RESULTS BEFORE DEADLINE
+    # 10. RESULTS BEFORE DEADLINE
     # ------------------------------------
 
     $beforeResults = Request-Api `
@@ -499,7 +517,7 @@ try {
         -Label "Winner and correct answer hidden during contest"
 
     # ------------------------------------
-    # 10. FINISH FIRST CONTEST
+    # 11. FINISH FIRST CONTEST
     # ------------------------------------
 
     Wait-UntilContestEnds ([string]$created.Json.endsAt)
@@ -532,7 +550,7 @@ try {
         "First correct participant wins"
 
     # ------------------------------------
-    # 11. SCORING AND RANKING
+    # 12. SCORING AND RANKING
     # ------------------------------------
 
     $players = @($finished1.Json.participants)
@@ -577,7 +595,7 @@ try {
         "Missing answer remains unsubmitted"
 
     # ------------------------------------
-    # 12. ACTIVE CONTEST CLEARED
+    # 13. ACTIVE CONTEST CLEARED
     # ------------------------------------
 
     $idle = Read-ActiveContest
@@ -587,7 +605,7 @@ try {
         "Active contest cleared after deadline"
 
     # ------------------------------------
-    # 13. CREATE SECOND CONTEST
+    # 14. CREATE SECOND CONTEST
     # ------------------------------------
 
     $secondPayload = @{
@@ -623,7 +641,7 @@ try {
         "Second contest becomes active"
 
     # ------------------------------------
-    # 14. HISTORICAL RESULTS PRESERVED
+    # 15. HISTORICAL RESULTS PRESERVED
     # ------------------------------------
 
     $historic = Request-Api `
@@ -639,7 +657,7 @@ try {
         -Label "First contest results preserved during second contest"
 
     # ------------------------------------
-    # 15. NO ANSWERS / NO WINNER
+    # 16. NO ANSWERS / NO WINNER
     # ------------------------------------
 
     Wait-UntilContestEnds ([string]$created2.Json.endsAt)

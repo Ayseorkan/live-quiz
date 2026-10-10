@@ -20,8 +20,8 @@ export const live = {
     ],
   },
   host: {
-    hostMode: "Yayıncı Görünümü",
-    viewerMode: "İzleyici Görünümü",
+    hostMode: "Yayıncı Görünümüne Geç",
+    viewerMode: "İzleyici Görünümüne Geç",
     create: "Yarışma Oluştur",
     active: "Aktif Yarışma",
     finished: "Yarışma Bitti",
@@ -30,6 +30,8 @@ export const live = {
   },
   nav: {
     join: "Yarışmaya Katıl",
+    badgeJoin: "Katıl",
+    ongoing: "Yarışma Devam Ediyor",
     results: "Sonuçları Gör",
     close: "Widget'ı Kapat",
   },

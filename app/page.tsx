@@ -40,11 +40,13 @@ function Widget({
   onClose,
   children,
   wide = false,
+  fixedActions = false,
 }: {
   title: string;
   onClose: () => void;
   children: ReactNode;
   wide?: boolean;
+  fixedActions?: boolean;
 }) {
   useEffect(() => {
     const onEscape = (event: KeyboardEvent) => {
@@ -58,7 +60,7 @@ function Widget({
       <section
         role="dialog"
         aria-label={title}
-        className={`pointer-events-auto flex max-h-full min-h-0 w-full flex-col overflow-hidden rounded-2xl bg-white text-slate-900 shadow-[0_24px_70px_rgba(0,0,0,.5)] ${wide ? "max-w-[800px]" : "max-w-[480px]"}`}
+        className={`pointer-events-auto flex max-h-full min-h-0 w-full flex-col overflow-hidden rounded-2xl bg-white text-slate-900 shadow-[0_24px_70px_rgba(0,0,0,.5)] ${fixedActions ? "h-full" : ""} ${wide ? "max-w-[800px]" : "max-w-[480px]"}`}
       >
         <header className="flex shrink-0 items-center justify-between border-b border-slate-200 px-4 py-3">
           <h2 className="truncate font-bold">{title}</h2>
@@ -71,7 +73,7 @@ function Widget({
             ×
           </button>
         </header>
-        <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain p-4">
+        <div className={fixedActions ? "min-h-0 flex-1 overflow-hidden" : "min-h-0 flex-1 overflow-y-auto overscroll-contain p-4"}>
           {children}
         </div>
       </section>
@@ -141,91 +143,95 @@ function CreateContestForm({
     }
   }
   return (
-    <form onSubmit={submit} className="space-y-4">
-      <div>
-        <label htmlFor="quiz-question" className="mb-2 block text-sm font-semibold">
-          {live.form.question}
-        </label>
-        <textarea
-          id="quiz-question"
-          required
-          rows={2}
-          maxLength={500}
-          value={question}
-          onChange={(event) => setQuestion(event.target.value)}
-          placeholder={live.form.questionPlaceholder}
-          className="w-full rounded-xl border border-slate-300 p-3 text-sm outline-none focus:border-indigo-500"
-        />
-      </div>
-      <fieldset>
-        <legend className="mb-2 text-sm font-semibold">{live.form.options}</legend>
-        <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-          {optionKeys.map((key) => (
-            <div key={key} className="flex min-w-0 items-center gap-2">
-              <span className="grid h-10 w-9 shrink-0 place-items-center rounded-lg bg-indigo-50 font-bold text-indigo-700">
-                {key}
-              </span>
-              <input
-                required
-                value={options[key]}
-                maxLength={200}
-                onChange={(event) =>
-                  setOptions((previous) => ({ ...previous, [key]: event.target.value }))
-                }
-                aria-label={`${live.form.optionPlaceholder} ${key}`}
-                placeholder={`${live.form.optionPlaceholder} ${key}`}
-                className="min-w-0 flex-1 rounded-lg border border-slate-300 p-2.5 text-sm outline-none focus:border-indigo-500"
-              />
-            </div>
-          ))}
-        </div>
-      </fieldset>
-      <div className="grid grid-cols-2 gap-3">
-        <div className="min-w-0">
-          <label htmlFor="quiz-correct" className="mb-2 block text-xs font-semibold">
-            {live.form.correct}
+    <form onSubmit={submit} className="flex h-full min-h-0 flex-col">
+      <div className="min-h-0 flex-1 space-y-4 overflow-y-auto overscroll-contain p-4">
+        <div>
+          <label htmlFor="quiz-question" className="mb-2 block text-sm font-semibold">
+            {live.form.question}
           </label>
-          <select
-            id="quiz-correct"
-            value={correctAnswer}
-            onChange={(event) => setCorrectAnswer(event.target.value as OptionKey)}
-            className="w-full rounded-lg border border-slate-300 bg-white p-3 text-sm"
-          >
-            {optionKeys.map((key) => <option key={key} value={key}>{key}</option>)}
-          </select>
+          <textarea
+            id="quiz-question"
+            required
+            rows={2}
+            maxLength={500}
+            value={question}
+            onChange={(event) => setQuestion(event.target.value)}
+            placeholder={live.form.questionPlaceholder}
+            className="w-full rounded-xl border border-slate-300 p-3 text-sm outline-none focus:border-blue-500"
+          />
         </div>
-        <div className="min-w-0">
-          <label htmlFor="quiz-duration" className="mb-2 block text-xs font-semibold">
-            {live.form.duration}
-          </label>
-          <select
-            id="quiz-duration"
-            value={duration}
-            onChange={(event) => setDuration(Number(event.target.value))}
-            className="w-full rounded-lg border border-slate-300 bg-white p-3 text-sm"
-          >
-            {[30, 60, 120].map((seconds) => (
-              <option key={seconds} value={seconds}>
-                {seconds} {live.form.seconds}
-              </option>
+        <fieldset>
+          <legend className="mb-2 text-sm font-semibold">{live.form.options}</legend>
+          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+            {optionKeys.map((key) => (
+              <div key={key} className="flex min-w-0 items-center gap-2">
+                <span className="grid h-10 w-9 shrink-0 place-items-center rounded-lg bg-blue-50 font-bold text-blue-600">
+                  {key}
+                </span>
+                <input
+                  required
+                  value={options[key]}
+                  maxLength={200}
+                  onChange={(event) =>
+                    setOptions((previous) => ({ ...previous, [key]: event.target.value }))
+                  }
+                  aria-label={`${live.form.optionPlaceholder} ${key}`}
+                  placeholder={`${live.form.optionPlaceholder} ${key}`}
+                  className="min-w-0 flex-1 rounded-lg border border-slate-300 p-2.5 text-sm outline-none focus:border-blue-500"
+                />
+              </div>
             ))}
-          </select>
+          </div>
+        </fieldset>
+        <div className="grid grid-cols-2 gap-3">
+          <div className="min-w-0">
+            <label htmlFor="quiz-correct" className="mb-2 block text-xs font-semibold">
+              {live.form.correct}
+            </label>
+            <select
+              id="quiz-correct"
+              value={correctAnswer}
+              onChange={(event) => setCorrectAnswer(event.target.value as OptionKey)}
+              className="w-full rounded-lg border border-slate-300 bg-white p-3 text-sm"
+            >
+              {optionKeys.map((key) => <option key={key} value={key}>{key}</option>)}
+            </select>
+          </div>
+          <div className="min-w-0">
+            <label htmlFor="quiz-duration" className="mb-2 block text-xs font-semibold">
+              {live.form.duration}
+            </label>
+            <select
+              id="quiz-duration"
+              value={duration}
+              onChange={(event) => setDuration(Number(event.target.value))}
+              className="w-full rounded-lg border border-slate-300 bg-white p-3 text-sm"
+            >
+              {[30, 60, 120].map((seconds) => (
+                <option key={seconds} value={seconds}>
+                  {seconds} {live.form.seconds}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+        <div className="rounded-xl bg-slate-50 p-3">
+          <h3 className="mb-2 text-xs font-bold">{live.contest.rulesTitle}</h3>
+          <ul className="list-disc space-y-1 pl-4 text-xs leading-5 text-slate-600">
+            {live.rules.map((rule) => <li key={rule}>{rule}</li>)}
+          </ul>
         </div>
       </div>
-      <div className="rounded-xl bg-slate-50 p-3">
-        <h3 className="mb-2 text-xs font-bold">{live.contest.rulesTitle}</h3>
-        <ul className="list-disc space-y-1 pl-4 text-xs leading-5 text-slate-600">
-          {live.rules.map((rule) => <li key={rule}>{rule}</li>)}
-        </ul>
+      <div className="shrink-0 border-t border-slate-200 bg-white p-4 shadow-[0_-10px_24px_rgba(15,23,42,.08)]">
+        {error && <p role="alert" className="mb-2 text-sm text-red-600">{error}</p>}
+        <button
+          type="submit"
+          disabled={creating}
+          className="w-full rounded-xl bg-blue-600 p-3 font-bold text-white hover:bg-blue-700 disabled:opacity-50"
+        >
+          {creating ? live.form.creating : live.form.start}
+        </button>
       </div>
-      {error && <p role="alert" className="text-sm text-red-600">{error}</p>}
-      <button
-        type="submit"
-        disabled={creating}
-        className="w-full rounded-xl bg-indigo-600 p-3 font-bold text-white hover:bg-indigo-700 disabled:opacity-50"
-      >
-        {creating ? live.form.creating : live.form.start}
-      </button>
     </form>
   );
 }
@@ -275,6 +281,7 @@ function AnswerWidget({
     0,
     Math.ceil((new Date(contest.endsAt).getTime() - (now + serverOffset)) / 1000)
   );
+  const progress = Math.min(100, Math.max(0, (remaining / contest.durationSeconds) * 100));
   const canSubmit =
     remaining > 0 && status === "ready" && checkedKey === participantKey &&
     selectedOption !== null && !submitting;
@@ -307,84 +314,104 @@ function AnswerWidget({
     }
   }
   return (
-    <div className="space-y-4">
-      <div className="flex items-center justify-between rounded-xl bg-indigo-50 p-3 text-indigo-700">
-        <span className="text-xs">{live.contest.timeLeft}</span>
-        <span className="text-xl font-bold tabular-nums">
-          {String(Math.floor(remaining / 60)).padStart(2, "0")}:
-          {String(remaining % 60).padStart(2, "0")}
-        </span>
-      </div>
-      <div>
-        <label htmlFor="participant" className="mb-2 block text-sm font-semibold">
-          {live.contest.participant}
-        </label>
-        <select
-          id="participant"
-          value={participantId}
-          disabled={submitting}
-          onChange={(event) => {
-            setStatus("checking");
-            setCheckedKey("");
-            setParticipantId(Number(event.target.value));
-          }}
-          className="w-full rounded-xl border border-slate-300 bg-white p-3 text-sm"
+    <div className="flex h-full min-h-0 flex-col">
+      <div className="min-h-0 flex-1 space-y-3 overflow-y-auto overscroll-contain p-4">
+        <div className="flex items-end justify-between gap-3">
+          <div className="min-w-0 flex-1">
+            <label htmlFor="participant" className="mb-1 block text-xs font-semibold">
+              {live.contest.participant}
+            </label>
+            <select
+              id="participant"
+              value={participantId}
+              disabled={submitting}
+              onChange={(event) => {
+                setStatus("checking");
+                setCheckedKey("");
+                setParticipantId(Number(event.target.value));
+              }}
+              className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-sm"
+            >
+              {Array.from({ length: 10 }, (_, index) => (
+                <option key={index} value={index + 1}>
+                  {live.contest.participant} {index + 1}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="shrink-0 text-right text-green-700">
+            <p className="text-[10px] font-semibold uppercase tracking-wide">
+              {live.contest.timeLeft}
+            </p>
+            <p className="text-xl font-bold tabular-nums">
+              {String(Math.floor(remaining / 60)).padStart(2, "0")}:
+              {String(remaining % 60).padStart(2, "0")}
+            </p>
+          </div>
+        </div>
+        <div className="h-1.5 overflow-hidden rounded-full bg-slate-200" aria-hidden="true">
+          <div
+            className="h-full rounded-full bg-green-600 transition-[width] duration-500"
+            style={{ width: `${progress}%` }}
+          />
+        </div>
+        <div className="flex min-h-[126px] items-center justify-center rounded-xl bg-blue-50 p-5 text-center font-semibold break-words">
+          {contest.question}
+        </div>
+        <fieldset
+          disabled={remaining === 0 || status !== "ready" || checkedKey !== participantKey || submitting}
+          className="space-y-2"
         >
-          {Array.from({ length: 10 }, (_, index) => (
-            <option key={index} value={index + 1}>
-              {live.contest.participant} {index + 1}
-            </option>
+          {optionKeys.map((key) => (
+            <label
+              key={key}
+              className={`flex min-w-0 cursor-pointer items-center gap-3 rounded-xl border px-3 py-2.5 transition ${
+                selectedOption === key ? "border-blue-500 bg-blue-50" : "border-slate-200 bg-white"
+              }`}
+            >
+              <span className="grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-slate-100 text-xs font-bold text-blue-600">
+                {key}
+              </span>
+              <span className="min-w-0 flex-1 break-words text-sm font-medium">
+                {contest.options[key]}
+              </span>
+              <input
+                type="radio"
+                name="contest-answer"
+                checked={selectedOption === key}
+                onChange={() => setSelectedOption(key)}
+                className="h-4 w-4 shrink-0 accent-green-600"
+              />
+            </label>
           ))}
-        </select>
+        </fieldset>
+        <details className="rounded-xl bg-slate-50 p-3">
+          <summary className="cursor-pointer text-xs font-bold">
+            {live.contest.rulesTitle}
+          </summary>
+          <ul className="mt-2 list-disc space-y-1 pl-4 text-xs leading-5 text-slate-600">
+            {live.rules.map((rule) => <li key={rule}>{rule}</li>)}
+          </ul>
+        </details>
       </div>
-      <div className="rounded-xl bg-indigo-50 p-4 font-semibold break-words">
-        {contest.question}
+      <div className="shrink-0 border-t border-slate-200 bg-white p-4 shadow-[0_-10px_24px_rgba(15,23,42,.08)]">
+        {status === "checking" && <p className="mb-2 text-xs">{live.contest.checking}</p>}
+        {status === "error" && <p role="alert" className="mb-2 text-xs text-red-600">{live.errors.request}</p>}
+        {status === "submitted" && (
+          <p className="mb-2 rounded-lg bg-green-50 p-2 text-sm text-green-700">
+            {message || live.contest.already}
+          </p>
+        )}
+        {message && status !== "submitted" && <p role="alert" className="mb-2 text-sm text-red-600">{message}</p>}
+        <button
+          type="button"
+          onClick={submit}
+          disabled={!canSubmit}
+          className="w-full rounded-xl bg-blue-500 p-3 font-bold text-white disabled:opacity-40"
+        >
+          {submitting ? live.contest.submitting : live.contest.submit}
+        </button>
       </div>
-      <fieldset
-        disabled={remaining === 0 || status !== "ready" || checkedKey !== participantKey || submitting}
-        className="space-y-2"
-      >
-        {optionKeys.map((key) => (
-          <label
-            key={key}
-            className={`flex min-w-0 cursor-pointer items-center gap-3 rounded-xl border p-3 ${
-              selectedOption === key ? "border-indigo-500 bg-indigo-50" : "border-slate-200"
-            }`}
-          >
-            <input
-              type="radio"
-              name="contest-answer"
-              checked={selectedOption === key}
-              onChange={() => setSelectedOption(key)}
-              className="h-4 w-4 shrink-0 accent-indigo-600"
-            />
-            <span className="font-bold text-indigo-700">{key}</span>
-            <span className="min-w-0 break-words text-sm">{contest.options[key]}</span>
-          </label>
-        ))}
-      </fieldset>
-      <div className="rounded-xl bg-slate-50 p-3">
-        <h3 className="mb-2 text-xs font-bold">{live.contest.rulesTitle}</h3>
-        <ul className="list-disc space-y-1 pl-4 text-xs leading-5 text-slate-600">
-          {live.rules.map((rule) => <li key={rule}>{rule}</li>)}
-        </ul>
-      </div>
-      {status === "checking" && <p className="text-xs">{live.contest.checking}</p>}
-      {status === "error" && <p role="alert" className="text-xs text-red-600">{live.errors.request}</p>}
-      {status === "submitted" && (
-        <p className="rounded-lg bg-green-50 p-3 text-sm text-green-700">
-          {message || live.contest.already}
-        </p>
-      )}
-      {message && status !== "submitted" && <p role="alert" className="text-sm text-red-600">{message}</p>}
-      <button
-        type="button"
-        onClick={submit}
-        disabled={!canSubmit}
-        className="w-full rounded-xl bg-indigo-600 p-3 font-bold text-white disabled:opacity-40"
-      >
-        {submitting ? live.contest.submitting : live.contest.submit}
-      </button>
     </div>
   );
 }
@@ -584,22 +611,44 @@ function ResultsWidget({ results }: { results: FinishedResults }) {
 function ContestBadge({
   finished,
   remaining,
+  mode,
   onClick,
 }: {
   finished: boolean;
   remaining: number;
+  mode: Mode;
   onClick: () => void;
 }) {
+  const hours = Math.floor(remaining / 3600);
+  const minutes = Math.floor((remaining % 3600) / 60);
+  const seconds = remaining % 60;
+  const countdown = [hours, minutes, seconds]
+    .map((value) => String(value).padStart(2, "0"))
+    .join(":");
+
   return (
-    <button
-      type="button"
-      onClick={onClick}
-      className="flex items-center gap-2 rounded-xl border border-indigo-200 bg-indigo-50 px-3 py-2 text-xs font-semibold text-indigo-700 hover:bg-indigo-100"
-    >
-      <span className={`h-2 w-2 shrink-0 rounded-full ${finished ? "bg-indigo-500" : "bg-green-500"}`} />
-      <span className="truncate">{finished ? live.host.finished : live.host.active}</span>
-      {!finished && <span className="tabular-nums">{remaining}s</span>}
-    </button>
+    <div className="flex w-full min-w-0 items-center gap-2 rounded-xl border border-amber-200 bg-amber-50 p-2 text-slate-900 shadow-sm">
+      <span className="grid h-9 w-9 shrink-0 place-items-center text-xl" aria-hidden="true">
+        🏆
+      </span>
+      <div className="min-w-0 flex-1">
+        <p className="truncate text-xs font-bold">
+          {finished ? live.host.finished : live.host.active}
+        </p>
+        <p className="mt-0.5 truncate text-[10px] font-medium text-slate-500">
+          {finished ? "Sonuçlar hazır" : `Sona: ${countdown}`}
+        </p>
+      </div>
+      {(finished || mode === "viewer") && (
+        <button
+          type="button"
+          onClick={onClick}
+          className="shrink-0 rounded-lg bg-amber-400 px-3 py-2 text-xs font-bold text-amber-950 transition hover:bg-amber-500"
+        >
+          {finished ? live.nav.results : live.nav.badgeJoin}
+        </button>
+      )}
+    </div>
   );
 }
 
@@ -686,12 +735,13 @@ export default function HomePage() {
         // Browser storage can be disabled; fall back to viewer for shared URLs.
       }
       if (id && uuidPattern.test(id)) {
+        const initialMode = savedMode ?? "viewer";
         pinnedSelection.current = true;
         setLoading(true);
         setContestId(id);
         setJoinId(id);
-        setMode(savedMode ?? "viewer");
-        setPanel("contest");
+        setMode(initialMode);
+        setPanel(initialMode === "host" ? "none" : "contest");
       } else if (savedMode) {
         setMode(savedMode);
       }
@@ -829,6 +879,7 @@ export default function HomePage() {
   }
   function openContest() {
     setMobileChatOpen(false);
+    if (mode === "host" && !finished) return;
     const target: Panel = !contestId ? "join" : finished ? "results" : "contest";
     setPanel((previous) => previous === target ? "none" : target);
   }
@@ -842,7 +893,7 @@ export default function HomePage() {
     selectContest(joinId, "viewer", true);
   }
   const badge = contestId ? (
-    <ContestBadge finished={finished} remaining={remaining} onClick={openContest} />
+    <ContestBadge finished={finished} remaining={remaining} mode={mode} onClick={openContest} />
   ) : null;
   function panelBody() {
     if (panel === "create") {
@@ -850,7 +901,7 @@ export default function HomePage() {
         <CreateContestForm
           onCreated={(data) => {
             setActiveContestId(data.contestId);
-            selectContest(data.contestId, "host");
+            selectContest(data.contestId, "viewer");
           }}
         />
       );
@@ -901,7 +952,7 @@ export default function HomePage() {
           <div className="absolute inset-0 bg-gradient-to-br from-[#273658] via-[#131c32] to-[#070b14]" />
           <header className="absolute inset-x-0 top-0 z-20 flex items-center justify-between gap-2 bg-gradient-to-b from-black/80 to-transparent p-3 sm:p-5">
             <div className="flex min-w-0 items-center gap-2 text-white">
-              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-indigo-600 text-sm font-bold">LQ</span>
+              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-red-800 text-sm font-bold">LQ</span>
               <div className="min-w-0">
                 <p className="truncate text-sm font-bold">{live.brand}</p>
                 <p className="hidden truncate text-xs text-slate-300 sm:block">{live.stream.topic}</p>
@@ -910,6 +961,8 @@ export default function HomePage() {
             <div className="flex shrink-0 items-center gap-2">
               <button
                 type="button"
+                aria-label={mode === "host" ? "İzleyici görünümüne geç" : "Yayıncı görünümüne geç"}
+                title={mode === "host" ? "İzleyici görünümüne geç" : "Yayıncı görünümüne geç"}
                 onClick={() => {
                   const nextMode: Mode = mode === "host" ? "viewer" : "host";
                   setMode(nextMode);
@@ -933,7 +986,6 @@ export default function HomePage() {
               </button>
               {!desktopChatOpen && (
                 <div className="hidden items-center gap-2 lg:flex">
-                  {badge}
                   <button
                     type="button"
                     onClick={() => setDesktopChatOpen(true)}
@@ -959,18 +1011,18 @@ export default function HomePage() {
                 type="button"
                 onClick={openCreate}
                 disabled={!activeChecked || creationBlocked}
-                className="min-w-0 flex-1 rounded-xl bg-indigo-600 px-2 py-3 text-[11px] font-bold text-white disabled:cursor-not-allowed disabled:opacity-50 sm:flex-none sm:px-5 sm:text-sm"
+                className="min-w-0 flex-1 rounded-xl bg-blue-700 px-2 py-3 text-[11px] font-bold text-white disabled:cursor-not-allowed disabled:opacity-50 sm:flex-none sm:px-5 sm:text-sm"
               >
-                {creationBlocked ? "Yarışma Devam Ediyor" : `+ ${live.host.create}`}
+                {creationBlocked ? live.nav.ongoing : `+ ${live.host.create}`}
               </button>
             )}
-            {creationBlocked && (
+            {mode === "viewer" && creationBlocked && (
               <button
                 type="button"
                 onClick={openContest}
-                className="min-w-0 flex-1 rounded-xl border border-white/20 bg-white/15 px-2 py-3 text-[11px] font-semibold text-white sm:flex-none sm:px-5 sm:text-sm"
+                className="min-w-0 flex-1 rounded-xl bg-blue-700 px-2 py-3 text-[11px] font-bold text-white sm:flex-none sm:px-5 sm:text-sm"
               >
-                {live.nav.join}
+                {live.nav.ongoing}
               </button>
             )}
             {finished && (
@@ -983,8 +1035,13 @@ export default function HomePage() {
               </button>
             )}
           </nav>
-          {panel !== "none" && (
-            <Widget title={panelTitle} onClose={closeWidget} wide={!!currentResults && panel !== "create" && panel !== "join"}>
+          {panel !== "none" && !(mode === "host" && panel === "contest" && !finished) && (
+            <Widget
+              title={panelTitle}
+              onClose={closeWidget}
+              wide={!!currentResults && panel !== "create" && panel !== "join"}
+              fixedActions={panel === "create" || (panel === "contest" && !!currentContest && remaining > 0)}
+            >
               {panelBody()}
             </Widget>
           )}
@@ -1001,7 +1058,7 @@ export default function HomePage() {
                 <Chat
                   onClose={() => setMobileChatOpen(false)}
                   badge={contestId ? (
-                    <ContestBadge finished={finished} remaining={remaining} onClick={() => { setMobileChatOpen(false); openContest(); }} />
+                    <ContestBadge finished={finished} remaining={remaining} mode={mode} onClick={() => { setMobileChatOpen(false); openContest(); }} />
                   ) : null}
                 />
               </aside>
