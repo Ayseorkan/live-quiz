@@ -36,7 +36,7 @@
     <img src="https://img.shields.io/badge/PostgreSQL-4169E1?style=flat-square&logo=postgresql&logoColor=white" alt="PostgreSQL"/>
   </a>
   <a href="https://vercel.com/" target="_blank">
-    <img src="https://img.shields.io/badge/Vercel-000000?style=flat-square&logo=vercel&logoColor=white" alt="Vercel"/>
+    <img src="https://img.shields.io/badge/Vercel-EDEDED?style=flat-square&logo=vercel&logoColor=black" alt="Vercel"/>
   </a>
 </p>
 
