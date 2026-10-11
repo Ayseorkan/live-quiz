@@ -57,6 +57,35 @@ CREATE TRIGGER check_answer_submission
 BEFORE INSERT ON public.answers
 FOR EACH ROW EXECUTE FUNCTION public.validate_answer_submission();
 
+-- Return the currently active contest using the database clock.
+-- A scalar UUID keeps the PostgREST RPC response compatible with the API.
+CREATE OR REPLACE FUNCTION public.get_active_contest_id()
+RETURNS UUID
+LANGUAGE plpgsql
+SET search_path = ''
+AS $$
+DECLARE
+    v_now TIMESTAMPTZ;
+    v_contest_id UUID;
+BEGIN
+    v_now := pg_catalog.clock_timestamp();
+
+    SELECT c.id INTO v_contest_id
+    FROM public.contests c
+    WHERE c.starts_at <= v_now
+      AND c.ends_at > v_now
+    ORDER BY c.starts_at DESC, c.id DESC
+    LIMIT 1;
+
+    RETURN v_contest_id;
+END;
+$$;
+
+REVOKE ALL ON FUNCTION public.get_active_contest_id()
+FROM PUBLIC, anon, authenticated;
+GRANT EXECUTE ON FUNCTION public.get_active_contest_id()
+TO service_role;
+
 -- Atomic create: one active contest per demo livestream.
 CREATE OR REPLACE FUNCTION public.create_contest_if_available(
     p_question TEXT,

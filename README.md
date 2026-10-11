@@ -64,7 +64,7 @@
 ## Özellikler
 
 - Tek soru, **A / B / C / D** seçenekleri ve tek doğru cevap.
-- Yayıncı tarafından seçilebilen **30, 60 veya 1a20 saniyelik** yarışma süresi.
+- Yayıncı tarafından seçilebilen **30, 60 veya 120 saniyelik** yarışma süresi.
 - **10 temsili katılımcı**; her katılımcı için yarışma başına yalnızca bir cevap hakkı.
 - Sunucu/veritabanı zamanına göre cevap kabulü; süre bitince yeni cevapların reddi.
 - Aynı yayın bağlamında **aynı anda yalnızca bir aktif yarışma** oluşturulabilmesi.
@@ -77,7 +77,7 @@
 
 ### 1. Yarışma oluşturma
 
-Yayıncı **Yarışma Oluştur** düğmesinden soruyu, dört seçeneği, doğru cevabı ve süreyi belirler. Yarışma başladıktan sonra ikinci bir yarışma oluşturulamaz; mevcut yarışma bittiğinde düğme yeniden kullanılabilir. Sağ üstteki butondan izleiyici ve yayıncı görünümü değişimi yapılabilir.
+Yayıncı **Yarışma Oluştur** düğmesinden soruyu, dört seçeneği, doğru cevabı ve süreyi belirler. Yarışma başladıktan sonra ikinci bir yarışma oluşturulamaz; mevcut yarışma bittiğinde düğme yeniden kullanılabilir. Sağ üstteki butondan izleyici ve yayıncı görünümü değişimi yapılabilir.
 
 <!-- EKRAN GÖRÜNTÜSÜ 2: Doldurulmuş yarışma oluşturma widget'ı, başlatma düğmesi de görünür. -->
 ![Yarışma oluşturma widget'ı](docs/screenshots/02-yarisma-olusturma.png)
@@ -198,7 +198,7 @@ live-quiz/
    npm install
    ```
 
-2. Supabase SQL Editor içinde `supabase/schema.sql` dosyasındaki veritabanı şemasını çalıştırın. Güncel API'nin kullandığı `create_contest_if_available` ve `get_active_contest_id` fonksiyonlarının veritabanında tanımlı olduğundan emin olun.
+2. Supabase SQL Editor içinde `supabase/schema.sql` dosyasındaki veritabanı şemasını çalıştırın. Bu dosya, API'nin kullandığı `create_contest_if_available` ve `get_active_contest_id` fonksiyonlarını da oluşturur.
 
 3. Proje kökünde `.env.local` dosyası oluşturun:
 
@@ -216,8 +216,6 @@ live-quiz/
    ```
 
    Ardından **http://localhost:3000** adresini açın.
-
-> **Not:** `get_active_contest_id` fonksiyonu veritabanında oluşturulmuş olsa bile depodaki `supabase/schema.sql` dosyasında henüz bulunmuyorsa, temiz kurulumların da çalışması için SQL dosyasına eklenmelidir.
 
 ## Testler
 
