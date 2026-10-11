@@ -46,7 +46,7 @@
 ---
 
 <!-- EKRAN GÖRÜNTÜSÜ 1: Masaüstünde lacivert yayın alanı + sağda açık sohbet. -->
-![Masaüstü yayın ve sohbet görünümü](docs/screenshots/01-yayin-ve-sohbet.png)
+![ Yayıncı GÖrünümü Masaüstü Yayın](docs/screenshots/01-yayin-ve-sohbet.png)
 
 ## Özellikler
 
@@ -74,21 +74,23 @@ Yayıncı **Yarışma Oluştur** düğmesinden soruyu, dört seçeneği, doğru 
 Katılımcı, aktif yarışmayı açar; 1–10 arasından temsili katılımcısını seçer ve geri sayım devam ederken **tek bir şık gönderir**. Bir kez kaydedilmiş cevap değiştirilemez. Şık seçmek tek başına kayıt oluşturmaz; **Cevabı Gönder** işlemine basılması gerekir.
 
 <!-- EKRAN GÖRÜNTÜSÜ 3: Aktif yarışma, süre sayacı, dört şık ve Cevabı Gönder düğmesi aynı karede. -->
-![Yarışmaya katılım ve cevap gönderme widget'ı](docs/screenshots/03-cevap-verme.png)
+![İzleyici Görünümü Yarışma widget'ı](docs/screenshots/03-cevap-verme.png)
 
 ### 3. Sonuçları görüntüleme
 
 Süre bitince cevap kabulü sona erer ve sonuçlar hesaplanır. Sonuç widget'ı otomatik açılır, **X** ile kapatılabilir. Doğru cevap, kazananın gerekçesi, ilk üç kürsüsü ve bütün katılımcılar için sonuç tablosu gösterilir. Hiç doğru cevap yoksa **Kazanan yok** durumu gösterilir.
 
 <!-- EKRAN GÖRÜNTÜSÜ 4: En az 3 katılımcının doğru yanıt verdiği yarışmanın kürsüsü ve altındaki sıralama tablosu. -->
-![Yarışma sonuçları, liderlik kürsüsü ve sıralama tablosu](docs/screenshots/04-sonuclar-ve-kursu.png)
+![Yarışma sonuçları ve liderlik kürsüsü ](docs/screenshots/04-sonuclar-ve-kursu.png)
+![Sıralama tablosu](docs/screenshots/06-sonuclar-ve-kursu2.png)
 
 ### 4. Mobil görünüm
 
 Mobil ekranda yayın alanı ön plandadır. Sohbet, sağ üstteki düğmeden **sağda kompakt bir pencere** olarak açılır ve kapatılır; yarışma widget'ları da küçük ekranlara uyarlanır.
 
 <!-- EKRAN GÖRÜNTÜSÜ 5: Telefon ekranında sağ tarafta açık olan sohbet widget'ı. -->
-![Mobil yayın ve sağda açılan sohbet](docs/screenshots/05-mobil-sohbet.png)
+![Yayıncı Mobil Yayın](docs/screenshots/05-mobil.png)
+![Yayıncı Mobil Yayın](docs/screenshots/07-mobil-sohbet.png)
 
 ## Değerlendirme kuralları
 
