@@ -47,9 +47,13 @@
 
 
 > [!IMPORTANT]
+> **Canlı Demo Linki:** [https://live-quiz-weld.vercel.app](https://live-quiz-weld.vercel.app)
+>
 > 🎭 **Yayıncı ve İzleyici Modlarını Deneyin!**
 >
 > Canlı demoda sağ üst köşedeki butonu kullanarak **Yayıncı ↔ İzleyici** görünümleri arasında geçiş yapabilirsiniz. Her iki deneyimi de keşfetmek için modları değiştirmeyi unutmayın!
+
+
 
 
 <!-- EKRAN GÖRÜNTÜSÜ 1: Masaüstünde lacivert yayın alanı + sağda açık sohbet. -->
@@ -71,7 +75,7 @@
 
 ### 1. Yarışma oluşturma
 
-Yayıncı **Yarışma Oluştur** düğmesinden soruyu, dört seçeneği, doğru cevabı ve süreyi belirler. Yarışma başladıktan sonra ikinci bir yarışma oluşturulamaz; mevcut yarışma bittiğinde düğme yeniden kullanılabilir. Sağ üstteki butondan izleiyici ve yayıncı görünümü değişimi yapılaiblir.
+Yayıncı **Yarışma Oluştur** düğmesinden soruyu, dört seçeneği, doğru cevabı ve süreyi belirler. Yarışma başladıktan sonra ikinci bir yarışma oluşturulamaz; mevcut yarışma bittiğinde düğme yeniden kullanılabilir. Sağ üstteki butondan izleiyici ve yayıncı görünümü değişimi yapılabilir.
 
 <!-- EKRAN GÖRÜNTÜSÜ 2: Doldurulmuş yarışma oluşturma widget'ı, başlatma düğmesi de görünür. -->
 ![Yarışma oluşturma widget'ı](docs/screenshots/02-yarisma-olusturma.png)
