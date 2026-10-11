@@ -18,7 +18,7 @@
 
 <p align="center">
   <a href="https://nextjs.org/" target="_blank">
-    <img src="https://img.shields.io/badge/Next.js-EDEDED?style=flat-square&logo=nextdotjs&logoColor=black" alt="Next.js"/>
+    <img src="https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=nextdotjs&logoColor=white" alt="Next.js"/>
   </a>
   <a href="https://react.dev/" target="_blank">
     <img src="https://img.shields.io/badge/React-149ECA?style=flat-square&logo=react&logoColor=white" alt="React"/>
@@ -36,7 +36,7 @@
     <img src="https://img.shields.io/badge/PostgreSQL-4169E1?style=flat-square&logo=postgresql&logoColor=white" alt="PostgreSQL"/>
   </a>
   <a href="https://vercel.com/" target="_blank">
-    <img src="https://img.shields.io/badge/Vercel-EDEDED?style=flat-square&logo=vercel&logoColor=black" alt="Vercel"/>
+    <img src="https://img.shields.io/badge/Vercel-000000?style=flat-square&logo=vercel&logoColor=white" alt="Vercel"/>
   </a>
 </p>
 
