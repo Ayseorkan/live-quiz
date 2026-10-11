@@ -47,7 +47,9 @@
 
 
 > [!IMPORTANT]
-> **Canlı Demo Linki :**  [https://live-quiz-weld.vercel.app](https://live-quiz-weld.vercel.app)
+> **Canlı Demo :**  [https://live-quiz-weld.vercel.app](https://live-quiz-weld.vercel.app)
+>
+> **Teknik Dokümantasyon:** [GEREKSINIM_ANALIZI.pdf](./GEREKSINIM_ANALIZI.pdf)
 >
 > 🎭 **Yayıncı ve İzleyici Modlarını Deneyin!**
 >
