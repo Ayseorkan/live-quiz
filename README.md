@@ -1,10 +1,33 @@
-# Live Quiz — Canlı Yayın Yarışma Prototipi
+<div align="center">
 
-Eğitici ve uygulamalı canlı yayınlarda izleyicilerin öğrendiklerini kısa bir yarışmada kullanabilmesi için geliştirilmiş, **tek soruluk çoktan seçmeli yarışma prototipi**.
+<h1>🎯 Live Quiz</h1>
 
-Yayıncı soruyu ve süreyi belirler; katılımcılar tek cevap gönderir. Süre dolduğunda sistem cevapları değerlendirir ve kazananı **önceden tanımlanmış, açıklanabilir kurallarla** belirler. Kura, beğeni sayısı veya ödeme miktarı kazananı etkilemez.
+<h3>Eğitici Canlı Yayınlar İçin Yarışma Prototipi</h3>
 
-> **Prototip kapsamı:** Yayın alanı ve sohbet, arayüzü göstermek için simüle edilmiştir. Gerçek video akışı, canlı mesajlaşma, kullanıcı hesabı ve ödül gönderimi içermez.
+<p>Yayıncının yarışma başlatabildiği, izleyicilerin süre içinde yanıt verdiği ve kazananın önceden belirlenen kurallarla açıklandığı interaktif bir <strong>Next.js + Supabase</strong> prototipi.</p>
+
+<p>
+  <a href="https://live-quiz-weld.vercel.app/">
+    <img alt="Live Demo" src="https://img.shields.io/badge/Live%20Demo-Uygulamay%C4%B1%20A%C3%A7-2563EB?style=for-the-badge&logo=vercel&logoColor=white" />
+  </a>
+  <a href="https://github.com/Ayseorkan/live-quiz">
+    <img alt="GitHub Repository" src="https://img.shields.io/badge/GitHub-Source%20Code-24292F?style=for-the-badge&logo=github&logoColor=white" />
+  </a>
+</p>
+
+<p>
+  <img alt="Next.js" src="https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=nextdotjs&logoColor=white" />
+  <img alt="React" src="https://img.shields.io/badge/React-149ECA?style=flat-square&logo=react&logoColor=white" />
+  <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white" />
+  <img alt="Tailwind CSS" src="https://img.shields.io/badge/Tailwind%20CSS-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white" />
+  <img alt="Supabase" src="https://img.shields.io/badge/Supabase-3ECF8E?style=flat-square&logo=supabase&logoColor=white" />
+  <img alt="PostgreSQL" src="https://img.shields.io/badge/PostgreSQL-4169E1?style=flat-square&logo=postgresql&logoColor=white" />
+  <img alt="Vercel" src="https://img.shields.io/badge/Vercel-000000?style=flat-square&logo=vercel&logoColor=white" />
+</p>
+
+</div>
+
+---
 
 <!-- EKRAN GÖRÜNTÜSÜ 1: Masaüstünde lacivert yayın alanı + sağda açık sohbet. -->
 ![Masaüstü yayın ve sohbet görünümü](docs/screenshots/01-yayin-ve-sohbet.png)
